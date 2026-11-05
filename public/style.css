@@ -39,6 +39,12 @@ nav a {
   margin-bottom: 20px;
 }
 
+.machine-img {
+  float: right;
+  width: 110px;
+  border-radius: 8px;
+}
+
 input,
 select {
   width: 100%;

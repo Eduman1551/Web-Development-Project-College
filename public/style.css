@@ -1,0 +1,86 @@
+:root {
+  --main: #2f6fb5;
+  --bg: #f2f4f7;
+  --card: #ffffff;
+  --text: #333333;
+  --green: #2e9e5b;
+  --red: #d64545;
+  --border: #dddddd;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+nav {
+  background: var(--main);
+  padding: 15px 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  background: var(--main);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.green {
+  background: var(--green);
+}
+
+.red {
+  background: var(--red);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}

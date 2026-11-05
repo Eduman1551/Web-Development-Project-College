@@ -107,5 +107,14 @@ document.getElementById("showAllBtn").addEventListener("click", function () {
 
 document.getElementById("date").min = new Date().toLocaleDateString("en-CA");
 
+const adminLink = document.getElementById("adminLink");
+if (sessionStorage.getItem("adminPassword")) {
+  adminLink.textContent = "Logout";
+  adminLink.href = "index.html";
+  adminLink.addEventListener("click", function () {
+    sessionStorage.removeItem("adminPassword");
+  });
+}
+
 loadDropdowns();
 loadBookings();

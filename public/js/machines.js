@@ -2,6 +2,9 @@ const form = document.getElementById("machineForm");
 const message = document.getElementById("message");
 const table = document.getElementById("machineTable");
 const cancelBtn = document.getElementById("cancelBtn");
+const adminLink = document.getElementById("adminLink");
+
+const adminPassword = sessionStorage.getItem("adminPassword");
 
 let machines = [];
 
@@ -12,15 +15,21 @@ async function loadMachines() {
   table.innerHTML = "";
   for (let i = 0; i < machines.length; i++) {
     const m = machines[i];
+    let buttons = "";
+    if (adminPassword) {
+      buttons =
+        "<td>" +
+        "<button onclick='editMachine(" + m.id + ")'>Edit</button> " +
+        "<button class='red' onclick='deleteMachine(" + m.id + ")'>Delete</button>" +
+        "</td>";
+    }
+
     table.innerHTML +=
       "<tr>" +
       "<td>" + m.name + "</td>" +
       "<td>" + m.floor + "</td>" +
       "<td>" + m.status + "</td>" +
-      "<td>" +
-      "<button onclick='editMachine(" + m.id + ")'>Edit</button> " +
-      "<button class='red' onclick='deleteMachine(" + m.id + ")'>Delete</button>" +
-      "</td>" +
+      buttons +
       "</tr>";
   }
 }
@@ -44,14 +53,16 @@ form.addEventListener("submit", async function (e) {
 
   const res = await fetch(url, {
     method: method,
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-admin-password": adminPassword },
     body: JSON.stringify(machine)
   });
   const data = await res.json();
   message.textContent = data.message;
 
-  resetForm();
-  loadMachines();
+  if (res.ok) {
+    resetForm();
+    loadMachines();
+  }
 });
 
 function editMachine(id) {
@@ -71,7 +82,12 @@ function editMachine(id) {
 
 async function deleteMachine(id) {
   if (confirm("Delete this machine? Its bookings will also be deleted.")) {
-    await fetch("/api/machines/" + id, { method: "DELETE" });
+    const res = await fetch("/api/machines/" + id, {
+      method: "DELETE",
+      headers: { "x-admin-password": adminPassword }
+    });
+    const data = await res.json();
+    message.textContent = data.message;
     loadMachines();
   }
 }
@@ -85,5 +101,15 @@ function resetForm() {
 }
 
 cancelBtn.addEventListener("click", resetForm);
+
+if (adminPassword) {
+  document.getElementById("formCard").hidden = false;
+  document.getElementById("actionsHeader").hidden = false;
+  adminLink.textContent = "Logout";
+  adminLink.href = "index.html";
+  adminLink.addEventListener("click", function () {
+    sessionStorage.removeItem("adminPassword");
+  });
+}
 
 loadMachines();

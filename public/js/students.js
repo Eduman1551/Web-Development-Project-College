@@ -91,4 +91,13 @@ function resetForm() {
 
 cancelBtn.addEventListener("click", resetForm);
 
+const adminLink = document.getElementById("adminLink");
+if (sessionStorage.getItem("adminPassword")) {
+  adminLink.textContent = "Logout";
+  adminLink.href = "index.html";
+  adminLink.addEventListener("click", function () {
+    sessionStorage.removeItem("adminPassword");
+  });
+}
+
 loadStudents();

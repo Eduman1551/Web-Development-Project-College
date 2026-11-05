@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bookings - Laundry Booking</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="extra.css">
 </head>
 <body>
   <nav>
@@ -16,6 +17,10 @@
   </nav>
 
   <div class="container">
+    <h1>Bookings</h1>
+
+    <marquee onmouseover="this.stop()" onmouseout="this.start()">One machine can be booked only once for a date and slot | Cancel your booking if you cannot come | Machines under repair cannot be booked</marquee>
+
     <div class="card">
       <h2>Book a Machine</h2>
       <p id="message"></p>

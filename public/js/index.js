@@ -26,7 +26,7 @@ async function loadTodayBookings() {
       "<td>" + b.student_name + "</td>" +
       "<td>" + b.machine_name + "</td>" +
       "<td>" + b.slot + "</td>" +
-      "<td>" + b.status + "</td>" +
+      "<td><span class='badge " + b.status + "'>" + b.status + "</span></td>" +
       "</tr>";
   }
 }

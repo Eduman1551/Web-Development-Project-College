@@ -62,7 +62,7 @@ async function loadBookings() {
       "<td>" + b.machine_name + "</td>" +
       "<td>" + b.booking_date + "</td>" +
       "<td>" + b.slot + "</td>" +
-      "<td>" + b.status + "</td>" +
+      "<td><span class='badge " + b.status + "'>" + b.status + "</span></td>" +
       "<td>" + buttons + "</td>" +
       "</tr>";
   }

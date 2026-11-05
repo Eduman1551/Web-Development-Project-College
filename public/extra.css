@@ -1,0 +1,130 @@
+:root {
+  --main: #0f766e;
+  --main-dark: #115e59;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --nav: #0f172a;
+  --green: #16a34a;
+  --amber: #d97706;
+  --red: #dc2626;
+}
+
+nav {
+  background: var(--nav);
+}
+
+nav a {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+nav a:hover {
+  background: var(--main);
+}
+
+h1 {
+  margin: 20px 0 15px;
+  padding-bottom: 10px;
+  font-size: 26px;
+  border-bottom: 2px solid var(--main);
+}
+
+h1 + p {
+  color: var(--muted);
+}
+
+label {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.banner,
+.machine-img {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--main);
+}
+
+button {
+  transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+  background: var(--main-dark);
+  transform: translateY(-1px);
+}
+
+button.green:hover {
+  background: var(--green);
+  filter: brightness(0.9);
+}
+
+button.red:hover {
+  background: var(--red);
+  filter: brightness(0.9);
+}
+
+th {
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  background: var(--bg);
+}
+
+td {
+  transition: background 0.2s;
+}
+
+tr:hover td {
+  background: rgba(15, 118, 110, 0.06);
+}
+
+marquee {
+  display: block;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: white;
+}
+
+.booked {
+  background: var(--main);
+}
+
+.done,
+.working {
+  background: var(--green);
+}
+
+.cancelled,
+.repair {
+  background: var(--red);
+}

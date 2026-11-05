@@ -28,7 +28,7 @@ async function loadMachines() {
       "<tr>" +
       "<td>" + m.name + "</td>" +
       "<td>" + m.floor + "</td>" +
-      "<td>" + m.status + "</td>" +
+      "<td><span class='badge " + m.status + "'>" + m.status + "</span></td>" +
       buttons +
       "</tr>";
   }

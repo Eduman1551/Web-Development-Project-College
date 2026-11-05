@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Laundry Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="students.html">Students</a>
+    <a href="machines.html">Machines</a>
+    <a href="bookings.html">Bookings</a>
+  </nav>
+
+  <div class="container">
+    <img src="images/banner.jpg" alt="Hostel room with bunk beds" class="banner">
+    <h1>Hostel Laundry Booking</h1>
+    <p>Book a washing machine for your date and time slot.</p>
+
+    <div class="stats">
+      <div class="card">
+        <h2 id="totalStudents">0</h2>
+        <p>Students</p>
+      </div>
+      <div class="card">
+        <h2 id="totalMachines">0</h2>
+        <p>Machines</p>
+      </div>
+      <div class="card">
+        <h2 id="bookingsToday">0</h2>
+        <p>Bookings Today</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Today's Bookings</h2>
+      <table>
+        <tr>
+          <th>Student</th>
+          <th>Machine</th>
+          <th>Slot</th>
+          <th>Status</th>
+        </tr>
+        <tbody id="todayTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+</html>

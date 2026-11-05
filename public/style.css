@@ -45,6 +45,35 @@ nav a {
   border-radius: 8px;
 }
 
+.banner {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stats .card {
+  flex: 1;
+  text-align: center;
+}
+
+.stats h2 {
+  margin: 0;
+  font-size: 32px;
+  color: var(--main);
+}
+
+input,
+select,
+button {
+  font-family: inherit;
+}
+
 input,
 select {
   width: 100%;
@@ -74,6 +103,7 @@ button {
 
 table {
   width: 100%;
+  margin-top: 15px;
   border-collapse: collapse;
 }
 
@@ -85,6 +115,11 @@ td {
 }
 
 @media (max-width: 600px) {
+  .stats {
+    flex-direction: column;
+    gap: 0;
+  }
+
   table {
     display: block;
     overflow-x: auto;

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students - Laundry Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="students.html">Students</a>
+    <a href="machines.html">Machines</a>
+    <a href="bookings.html">Bookings</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2 id="formTitle">Add Student</h2>
+      <p id="message"></p>
+      <form id="studentForm">
+        <input type="hidden" id="studentId">
+
+        <label>Name</label>
+        <input type="text" id="name" required>
+
+        <label>Roll No</label>
+        <input type="text" id="rollNo" required>
+
+        <label>Room No</label>
+        <input type="text" id="roomNo" required>
+
+        <label>Phone</label>
+        <input type="text" id="phone">
+
+        <button type="submit" id="saveBtn">Add Student</button>
+        <button type="button" id="cancelBtn" class="red" hidden>Cancel</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>All Students</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Roll No</th>
+          <th>Room No</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+        <tbody id="studentTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/students.js"></script>
+</body>
+</html>

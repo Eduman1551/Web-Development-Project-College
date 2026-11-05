@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookings - Laundry Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="students.html">Students</a>
+    <a href="machines.html">Machines</a>
+    <a href="bookings.html">Bookings</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Book a Machine</h2>
+      <p id="message"></p>
+      <form id="bookingForm">
+        <label>Student</label>
+        <select id="student" required></select>
+
+        <label>Machine</label>
+        <select id="machine" required></select>
+
+        <label>Date</label>
+        <input type="date" id="date" required>
+
+        <label>Slot</label>
+        <select id="slot" required></select>
+
+        <button type="submit">Book Now</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>All Bookings</h2>
+      <label>Filter by date</label>
+      <input type="date" id="filterDate">
+      <button type="button" id="showAllBtn">Show All</button>
+
+      <table>
+        <tr>
+          <th>Student</th>
+          <th>Machine</th>
+          <th>Date</th>
+          <th>Slot</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        <tbody id="bookingTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/bookings.js"></script>
+</body>
+</html>

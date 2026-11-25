@@ -34,9 +34,8 @@ router.post("/login", async function (req, res) {
 });
 
 router.post("/logout", function (req, res) {
-  req.session.destroy(function () {
-    res.json({ message: "Logged out" });
-  });
+  req.session = null;
+  res.json({ message: "Logged out" });
 });
 
 router.get("/me", async function (req, res) {

@@ -33,9 +33,8 @@ router.delete("/:id", async function (req, res) {
   }
 
   await db.query("DELETE FROM students WHERE id = $1", [req.params.id]);
-  req.session.destroy(function () {
-    res.json({ message: "Student deleted" });
-  });
+  req.session = null;
+  res.json({ message: "Student deleted" });
 });
 
 module.exports = router;

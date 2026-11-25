@@ -3,25 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Machines - Laundry Booking</title>
+  <title>Machines - WashThoseClothes.IIITK</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="extra.css">
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="students.html">Students</a>
-    <a href="machines.html">Machines</a>
-    <a href="bookings.html">Bookings</a>
-    <span id="authLinks"></span>
+    <a href="index.html" class="brand">
+      <img src="images/logo.svg" alt="WashThoseClothes.IIITK logo">
+      <span>WashThoseClothes.IIITK</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="students.html">Students</a>
+      <a href="machines.html" class="active">Machines</a>
+      <a href="bookings.html">Bookings</a>
+      <span id="authLinks"></span>
+    </div>
   </nav>
 
   <div class="container">
     <h1>Machines</h1>
+    <p class="intro">Check which washing machines are working. Only the warden can add or change machines.</p>
 
     <div class="card" id="formCard" hidden>
       <h2 id="formTitle">Add Machine</h2>
-      <p id="message"></p>
+      <p class="subtitle">Add a new machine or change its floor and status.</p>
       <form id="machineForm">
         <input type="hidden" id="machineId">
 
@@ -38,8 +49,9 @@
         </select>
 
         <button type="submit" id="saveBtn">Add Machine</button>
-        <button type="button" id="cancelBtn" class="red" hidden>Cancel</button>
+        <button type="button" id="cancelBtn" class="secondary" hidden>Cancel</button>
       </form>
+      <p id="message"></p>
     </div>
 
     <div class="card">
@@ -59,5 +71,6 @@
 
   <script src="js/auth.js"></script>
   <script src="js/machines.js"></script>
+  <script src="js/animate.js"></script>
 </body>
 </html>

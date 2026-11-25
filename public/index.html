@@ -3,23 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hostel Laundry Booking</title>
+  <title>WashThoseClothes.IIITK</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="extra.css">
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="students.html">Students</a>
-    <a href="machines.html">Machines</a>
-    <a href="bookings.html">Bookings</a>
-    <span id="authLinks"></span>
+    <a href="index.html" class="brand">
+      <img src="images/logo.svg" alt="WashThoseClothes.IIITK logo">
+      <span>WashThoseClothes.IIITK</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="students.html">Students</a>
+      <a href="machines.html">Machines</a>
+      <a href="bookings.html">Bookings</a>
+      <span id="authLinks"></span>
+    </div>
   </nav>
 
   <div class="container">
-    <img src="images/banner.jpg" alt="Hostel room with bunk beds" class="banner">
-    <h1>Hostel Laundry Booking</h1>
-    <p>Book a washing machine for your date and time slot.</p>
+    <section class="hero">
+      <h1>Welcome to WashThoseClothes.IIITK</h1>
+      <p>Book a washing machine for your date and time slot. No queues and no clashes.</p>
+      <a href="bookings.html" class="button">Book a Slot</a>
+    </section>
 
     <marquee onmouseover="this.stop()" onmouseout="this.start()">Wash timings: 6 AM to 10 PM | Please collect your clothes on time | Report broken machines to the warden</marquee>
 
@@ -50,9 +62,42 @@
         <tbody id="todayTable"></tbody>
       </table>
     </div>
+
+    <h2 class="section-title">How it works</h2>
+    <div class="steps">
+      <div class="card step">
+        <span class="step-number">1</span>
+        <h3>Register</h3>
+        <p>Create your account with your roll no.</p>
+      </div>
+      <div class="card step">
+        <span class="step-number">2</span>
+        <h3>Pick a slot</h3>
+        <p>Choose a machine, a date and a time slot.</p>
+      </div>
+      <div class="card step">
+        <span class="step-number">3</span>
+        <h3>Wash and collect</h3>
+        <p>Use your slot and take your clothes on time.</p>
+      </div>
+    </div>
+
+    <div class="card rules">
+      <div>
+        <h2>Laundry Rules</h2>
+        <ul>
+          <li>One machine can be booked only once for a date and slot.</li>
+          <li>Cancel your booking if you cannot come.</li>
+          <li>Machines under repair cannot be booked.</li>
+          <li>Collect your clothes as soon as the wash is done.</li>
+        </ul>
+      </div>
+      <img src="images/laundromat.jpg" alt="Clean laundry room with washing machines">
+    </div>
   </div>
 
   <script src="js/auth.js"></script>
   <script src="js/index.js"></script>
+  <script src="js/animate.js"></script>
 </body>
 </html>

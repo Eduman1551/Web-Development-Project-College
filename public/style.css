@@ -1,123 +1,321 @@
 :root {
-  --main: #2f6fb5;
-  --bg: #f2f4f7;
+  --main: #0f766e;
+  --main-dark: #115e59;
+  --bg: #f8fafc;
   --card: #ffffff;
-  --text: #333333;
-  --green: #2e9e5b;
-  --red: #d64545;
-  --border: #dddddd;
+  --glass: rgba(255, 255, 255, 0.88);
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --nav: #0f172a;
+  --green: #16a34a;
+  --amber: #d97706;
+  --red: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--bg);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: var(--bg) url("images/site-bg.jpg") center / cover fixed;
   color: var(--text);
 }
 
-nav {
-  background: var(--main);
-  padding: 15px 20px;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(248, 250, 252, 0.8);
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-right: 20px;
+h1,
+h2,
+h3 {
+  margin: 0 0 10px;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.container {
-  max-width: 900px;
-  margin: 25px auto;
-  padding: 0 15px;
+h1 {
+  margin-top: 24px;
+  padding-bottom: 10px;
+  font-size: 30px;
+  border-bottom: 2px solid var(--main);
 }
 
-.card {
-  background: var(--card);
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
+h2 {
+  font-size: 20px;
 }
 
-.machine-img {
-  float: right;
-  width: 110px;
-  border-radius: 8px;
+h3 {
+  font-size: 17px;
 }
 
-.banner {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 8px;
+p {
+  margin: 0 0 12px;
 }
 
-.stats {
-  display: flex;
-  gap: 20px;
-}
-
-.stats .card {
-  flex: 1;
-  text-align: center;
-}
-
-.stats h2 {
-  margin: 0;
-  font-size: 32px;
+a {
   color: var(--main);
 }
 
-input,
-select,
-button {
-  font-family: inherit;
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--nav);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-links a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--main);
+  color: white;
+}
+
+#authLinks {
+  display: contents;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.card {
+  margin-bottom: 24px;
+  padding: 24px;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
 }
 
 input,
 select {
   width: 100%;
-  padding: 8px;
-  margin: 5px 0 15px;
+  height: 46px;
+  padding: 0 14px;
+  margin-bottom: 18px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: white;
   border: 1px solid var(--border);
-  border-radius: 5px;
-  box-sizing: border-box;
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
-button {
-  background: var(--main);
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--main);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.18);
+  transform: translateY(-1px);
+}
+
+button,
+.button {
+  display: inline-block;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
   color: white;
+  text-decoration: none;
+  background: var(--main);
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.green {
+button:hover,
+.button:hover {
+  background: var(--main-dark);
+  transform: translateY(-1px);
+}
+
+button.green {
   background: var(--green);
 }
 
-.red {
+button.red {
   background: var(--red);
+}
+
+button.green:hover,
+button.red:hover {
+  filter: brightness(0.9);
+}
+
+form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+}
+
+form button[type="submit"]:hover {
+  box-shadow: 0 6px 16px rgba(15, 118, 110, 0.35);
+}
+
+button.secondary {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+button.secondary:hover {
+  color: var(--text);
+  background: rgba(100, 116, 139, 0.1);
+  transform: none;
+}
+
+#message {
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid var(--muted);
+  border-radius: 8px;
+}
+
+#message.success {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: var(--green);
+}
+
+#message.error {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: var(--red);
+}
+
+#message:empty {
+  display: none;
 }
 
 table {
   width: 100%;
-  margin-top: 15px;
+  margin-top: 12px;
   border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 8px;
+th {
+  padding: 12px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
   text-align: left;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid var(--border);
+}
+
+td {
+  padding: 14px 12px;
   border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+td button {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+tr:hover td {
+  background: rgba(15, 118, 110, 0.06);
 }
 
 @media (max-width: 600px) {
-  .stats {
-    flex-direction: column;
-    gap: 0;
+  nav {
+    position: static;
+    padding: 10px 14px;
+  }
+
+  .brand {
+    font-size: 16px;
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-links a {
+    padding: 5px 7px;
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .container {
+    padding: 0 14px;
+  }
+
+  .card {
+    padding: 18px;
   }
 
   table {

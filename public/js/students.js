@@ -48,6 +48,7 @@ form.addEventListener("submit", async function (e) {
   });
   const data = await res.json();
   message.textContent = data.message;
+  message.className = res.ok ? "success" : "error";
 
   if (res.ok) {
     formCard.hidden = true;

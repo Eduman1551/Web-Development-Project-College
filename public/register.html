@@ -3,23 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Laundry Booking</title>
+  <title>Register - WashThoseClothes.IIITK</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="extra.css">
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="students.html">Students</a>
-    <a href="machines.html">Machines</a>
-    <a href="bookings.html">Bookings</a>
-    <span id="authLinks"></span>
+    <a href="index.html" class="brand">
+      <img src="images/logo.svg" alt="WashThoseClothes.IIITK logo">
+      <span>WashThoseClothes.IIITK</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="students.html">Students</a>
+      <a href="machines.html">Machines</a>
+      <a href="bookings.html">Bookings</a>
+      <span id="authLinks"></span>
+    </div>
   </nav>
 
-  <div class="container">
-    <div class="card">
-      <h2>Register</h2>
-      <p id="message"></p>
+  <div class="container center">
+    <div class="card auth-card">
+      <h2>Create your account</h2>
+      <p class="subtitle">Register once and start booking washing machines.</p>
       <form id="registerForm">
         <label>Name</label>
         <input type="text" id="name" required>
@@ -38,11 +48,13 @@
 
         <button type="submit">Register</button>
       </form>
-      <p>Already registered? <a href="login.html">Login here</a></p>
+      <p id="message"></p>
+      <p class="switch">Already registered? <a href="login.html">Login here</a></p>
     </div>
   </div>
 
   <script src="js/auth.js"></script>
   <script src="js/register.js"></script>
+  <script src="js/animate.js"></script>
 </body>
 </html>

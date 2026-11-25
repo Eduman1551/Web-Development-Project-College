@@ -18,5 +18,6 @@ form.addEventListener("submit", async function (e) {
     window.location.href = "index.html";
   } else {
     message.textContent = data.message;
+    message.className = "error";
   }
 });

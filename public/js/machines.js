@@ -56,6 +56,7 @@ form.addEventListener("submit", async function (e) {
   });
   const data = await res.json();
   message.textContent = data.message;
+  message.className = res.ok ? "success" : "error";
 
   if (res.ok) {
     resetForm();
@@ -83,6 +84,7 @@ async function deleteMachine(id) {
     const res = await fetch("/api/machines/" + id, { method: "DELETE" });
     const data = await res.json();
     message.textContent = data.message;
+    message.className = res.ok ? "success" : "error";
     loadMachines();
   }
 }

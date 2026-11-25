@@ -2,11 +2,9 @@ const form = document.getElementById("machineForm");
 const message = document.getElementById("message");
 const table = document.getElementById("machineTable");
 const cancelBtn = document.getElementById("cancelBtn");
-const adminLink = document.getElementById("adminLink");
-
-const adminPassword = sessionStorage.getItem("adminPassword");
 
 let machines = [];
+let isAdmin = false;
 
 async function loadMachines() {
   const res = await fetch("/api/machines");
@@ -16,7 +14,7 @@ async function loadMachines() {
   for (let i = 0; i < machines.length; i++) {
     const m = machines[i];
     let buttons = "";
-    if (adminPassword) {
+    if (isAdmin) {
       buttons =
         "<td>" +
         "<button onclick='editMachine(" + m.id + ")'>Edit</button> " +
@@ -53,7 +51,7 @@ form.addEventListener("submit", async function (e) {
 
   const res = await fetch(url, {
     method: method,
-    headers: { "Content-Type": "application/json", "x-admin-password": adminPassword },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(machine)
   });
   const data = await res.json();
@@ -82,10 +80,7 @@ function editMachine(id) {
 
 async function deleteMachine(id) {
   if (confirm("Delete this machine? Its bookings will also be deleted.")) {
-    const res = await fetch("/api/machines/" + id, {
-      method: "DELETE",
-      headers: { "x-admin-password": adminPassword }
-    });
+    const res = await fetch("/api/machines/" + id, { method: "DELETE" });
     const data = await res.json();
     message.textContent = data.message;
     loadMachines();
@@ -102,14 +97,13 @@ function resetForm() {
 
 cancelBtn.addEventListener("click", resetForm);
 
-if (adminPassword) {
-  document.getElementById("formCard").hidden = false;
-  document.getElementById("actionsHeader").hidden = false;
-  adminLink.textContent = "Logout";
-  adminLink.href = "index.html";
-  adminLink.addEventListener("click", function () {
-    sessionStorage.removeItem("adminPassword");
-  });
-}
-
-loadMachines();
+userReady.then(function () {
+  if (currentUser) {
+    isAdmin = currentUser.role === "admin";
+    if (isAdmin) {
+      document.getElementById("formCard").hidden = false;
+      document.getElementById("actionsHeader").hidden = false;
+    }
+    loadMachines();
+  }
+});

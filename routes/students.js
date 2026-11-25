@@ -4,28 +4,21 @@ const db = require("../db");
 const router = express.Router();
 
 router.get("/", async function (req, res) {
-  const [students] = await db.query("SELECT * FROM students ORDER BY id");
-  res.json(students);
-});
-
-router.post("/", async function (req, res) {
-  const { name, roll_no, room_no, phone } = req.body;
-  try {
-    await db.query(
-      "INSERT INTO students (name, roll_no, room_no, phone) VALUES (?, ?, ?, ?)",
-      [name, roll_no, room_no, phone]
-    );
-    res.json({ message: "Student added" });
-  } catch (err) {
-    res.status(400).json({ message: "Roll no already exists" });
-  }
+  const result = await db.query(
+    "SELECT id, name, roll_no, room_no, phone FROM students WHERE role = 'student' ORDER BY id"
+  );
+  res.json(result.rows);
 });
 
 router.put("/:id", async function (req, res) {
+  if (Number(req.params.id) !== req.session.userId) {
+    return res.status(403).json({ message: "You can edit only your own entry" });
+  }
+
   const { name, roll_no, room_no, phone } = req.body;
   try {
     await db.query(
-      "UPDATE students SET name = ?, roll_no = ?, room_no = ?, phone = ? WHERE id = ?",
+      "UPDATE students SET name = $1, roll_no = $2, room_no = $3, phone = $4 WHERE id = $5",
       [name, roll_no, room_no, phone, req.params.id]
     );
     res.json({ message: "Student updated" });
@@ -35,8 +28,14 @@ router.put("/:id", async function (req, res) {
 });
 
 router.delete("/:id", async function (req, res) {
-  await db.query("DELETE FROM students WHERE id = ?", [req.params.id]);
-  res.json({ message: "Student deleted" });
+  if (Number(req.params.id) !== req.session.userId) {
+    return res.status(403).json({ message: "You can delete only your own entry" });
+  }
+
+  await db.query("DELETE FROM students WHERE id = $1", [req.params.id]);
+  req.session.destroy(function () {
+    res.json({ message: "Student deleted" });
+  });
 });
 
 module.exports = router;

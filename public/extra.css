@@ -34,6 +34,10 @@ h1 {
   border-bottom: 2px solid var(--main);
 }
 
+.card a {
+  color: var(--main);
+}
+
 h1 + p {
   color: var(--muted);
 }

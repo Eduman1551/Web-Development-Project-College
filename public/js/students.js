@@ -1,7 +1,7 @@
 const form = document.getElementById("studentForm");
 const message = document.getElementById("message");
 const table = document.getElementById("studentTable");
-const cancelBtn = document.getElementById("cancelBtn");
+const formCard = document.getElementById("formCard");
 
 let students = [];
 
@@ -12,16 +12,20 @@ async function loadStudents() {
   table.innerHTML = "";
   for (let i = 0; i < students.length; i++) {
     const s = students[i];
+    let buttons = "";
+    if (s.id === currentUser.id) {
+      buttons =
+        "<button onclick='editStudent(" + s.id + ")'>Edit</button> " +
+        "<button class='red' onclick='deleteStudent(" + s.id + ")'>Delete</button>";
+    }
+
     table.innerHTML +=
       "<tr>" +
       "<td>" + s.name + "</td>" +
       "<td>" + s.roll_no + "</td>" +
       "<td>" + s.room_no + "</td>" +
       "<td>" + (s.phone || "") + "</td>" +
-      "<td>" +
-      "<button onclick='editStudent(" + s.id + ")'>Edit</button> " +
-      "<button class='red' onclick='deleteStudent(" + s.id + ")'>Delete</button>" +
-      "</td>" +
+      "<td>" + buttons + "</td>" +
       "</tr>";
   }
 }
@@ -37,15 +41,8 @@ form.addEventListener("submit", async function (e) {
     phone: document.getElementById("phone").value
   };
 
-  let url = "/api/students";
-  let method = "POST";
-  if (id) {
-    url = "/api/students/" + id;
-    method = "PUT";
-  }
-
-  const res = await fetch(url, {
-    method: method,
+  const res = await fetch("/api/students/" + id, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(student)
   });
@@ -53,7 +50,7 @@ form.addEventListener("submit", async function (e) {
   message.textContent = data.message;
 
   if (res.ok) {
-    resetForm();
+    formCard.hidden = true;
     loadStudents();
   }
 });
@@ -69,35 +66,22 @@ function editStudent(id) {
   document.getElementById("roomNo").value = student.room_no;
   document.getElementById("phone").value = student.phone || "";
 
-  document.getElementById("formTitle").textContent = "Edit Student";
-  document.getElementById("saveBtn").textContent = "Update Student";
-  cancelBtn.hidden = false;
+  formCard.hidden = false;
 }
 
 async function deleteStudent(id) {
-  if (confirm("Delete this student? Their bookings will also be deleted.")) {
+  if (confirm("Delete your account? Your bookings will also be deleted.")) {
     await fetch("/api/students/" + id, { method: "DELETE" });
-    loadStudents();
+    window.location.href = "login.html";
   }
 }
 
-function resetForm() {
-  form.reset();
-  document.getElementById("studentId").value = "";
-  document.getElementById("formTitle").textContent = "Add Student";
-  document.getElementById("saveBtn").textContent = "Add Student";
-  cancelBtn.hidden = true;
-}
+document.getElementById("cancelBtn").addEventListener("click", function () {
+  formCard.hidden = true;
+});
 
-cancelBtn.addEventListener("click", resetForm);
-
-const adminLink = document.getElementById("adminLink");
-if (sessionStorage.getItem("adminPassword")) {
-  adminLink.textContent = "Logout";
-  adminLink.href = "index.html";
-  adminLink.addEventListener("click", function () {
-    sessionStorage.removeItem("adminPassword");
-  });
-}
-
-loadStudents();
+userReady.then(function () {
+  if (currentUser) {
+    loadStudents();
+  }
+});

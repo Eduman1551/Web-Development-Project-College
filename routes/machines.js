@@ -4,24 +4,22 @@ const db = require("../db");
 const router = express.Router();
 
 function checkAdmin(req, res, next) {
-  const password = req.headers["x-admin-password"];
-
-  if (password && password === process.env.ADMIN_PASSWORD) {
+  if (req.session.role === "admin") {
     next();
   } else {
-    res.status(401).json({ message: "Wrong admin password" });
+    res.status(403).json({ message: "Only the admin can do this" });
   }
 }
 
 router.get("/", async function (req, res) {
-  const [machines] = await db.query("SELECT * FROM machines ORDER BY id");
-  res.json(machines);
+  const result = await db.query("SELECT * FROM machines ORDER BY id");
+  res.json(result.rows);
 });
 
 router.post("/", checkAdmin, async function (req, res) {
   const { name, floor, status } = req.body;
   await db.query(
-    "INSERT INTO machines (name, floor, status) VALUES (?, ?, ?)",
+    "INSERT INTO machines (name, floor, status) VALUES ($1, $2, $3)",
     [name, floor, status]
   );
   res.json({ message: "Machine added" });
@@ -30,14 +28,14 @@ router.post("/", checkAdmin, async function (req, res) {
 router.put("/:id", checkAdmin, async function (req, res) {
   const { name, floor, status } = req.body;
   await db.query(
-    "UPDATE machines SET name = ?, floor = ?, status = ? WHERE id = ?",
+    "UPDATE machines SET name = $1, floor = $2, status = $3 WHERE id = $4",
     [name, floor, status, req.params.id]
   );
   res.json({ message: "Machine updated" });
 });
 
 router.delete("/:id", checkAdmin, async function (req, res) {
-  await db.query("DELETE FROM machines WHERE id = ?", [req.params.id]);
+  await db.query("DELETE FROM machines WHERE id = $1", [req.params.id]);
   res.json({ message: "Machine deleted" });
 });
 

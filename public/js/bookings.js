@@ -13,13 +13,6 @@ const table = document.getElementById("bookingTable");
 const filterDate = document.getElementById("filterDate");
 
 async function loadDropdowns() {
-  const studentsRes = await fetch("/api/students");
-  const students = await studentsRes.json();
-  for (let i = 0; i < students.length; i++) {
-    document.getElementById("student").innerHTML +=
-      "<option value='" + students[i].id + "'>" + students[i].name + " (" + students[i].roll_no + ")</option>";
-  }
-
   const machinesRes = await fetch("/api/machines");
   const machines = await machinesRes.json();
   for (let i = 0; i < machines.length; i++) {
@@ -49,11 +42,16 @@ async function loadBookings() {
   table.innerHTML = "";
   for (let i = 0; i < bookings.length; i++) {
     const b = bookings[i];
+    const isMine = b.student_id === currentUser.id;
+
     let buttons = "";
-    if (b.status === "booked") {
+    if (isMine && b.status === "booked") {
       buttons =
         "<button class='green' onclick='changeStatus(" + b.id + ", \"done\")'>Done</button> " +
-        "<button class='red' onclick='changeStatus(" + b.id + ", \"cancelled\")'>Cancel</button>";
+        "<button class='red' onclick='changeStatus(" + b.id + ", \"cancelled\")'>Cancel</button> ";
+    }
+    if (isMine || currentUser.role === "admin") {
+      buttons += "<button class='red' onclick='deleteBooking(" + b.id + ")'>Delete</button>";
     }
 
     table.innerHTML +=
@@ -72,7 +70,6 @@ form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const booking = {
-    student_id: document.getElementById("student").value,
     machine_id: document.getElementById("machine").value,
     booking_date: document.getElementById("date").value,
     slot: document.getElementById("slot").value
@@ -98,6 +95,13 @@ async function changeStatus(id, status) {
   loadBookings();
 }
 
+async function deleteBooking(id) {
+  if (confirm("Delete this booking?")) {
+    await fetch("/api/bookings/" + id, { method: "DELETE" });
+    loadBookings();
+  }
+}
+
 filterDate.addEventListener("change", loadBookings);
 
 document.getElementById("showAllBtn").addEventListener("click", function () {
@@ -107,14 +111,9 @@ document.getElementById("showAllBtn").addEventListener("click", function () {
 
 document.getElementById("date").min = new Date().toLocaleDateString("en-CA");
 
-const adminLink = document.getElementById("adminLink");
-if (sessionStorage.getItem("adminPassword")) {
-  adminLink.textContent = "Logout";
-  adminLink.href = "index.html";
-  adminLink.addEventListener("click", function () {
-    sessionStorage.removeItem("adminPassword");
-  });
-}
-
-loadDropdowns();
-loadBookings();
+userReady.then(function () {
+  if (currentUser) {
+    loadDropdowns();
+    loadBookings();
+  }
+});

@@ -1,12 +1,14 @@
-const mysql = require("mysql2");
+const { Pool, types } = require("pg");
 require("dotenv").config();
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  dateStrings: true
+types.setTypeParser(1082, function (value) {
+  return value;
 });
 
-module.exports = pool.promise();
+const pool = new Pool({ connectionString: process.env.NEONDB_CONN });
+
+pool.on("error", function (err) {
+  console.log("Database error: " + err.message);
+});
+
+module.exports = pool;

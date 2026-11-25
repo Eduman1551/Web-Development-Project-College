@@ -25,3 +25,12 @@ npm start
 ```
 
 5. Open http://localhost:3000 in the browser.
+
+## Login Details
+
+| Roll No | Password | Role |
+| --- | --- | --- |
+| admin | admin123 | Admin (warden) |
+| 23CS101 | student123 | Student (Rahul Sharma) |
+| 23CS102 | student123 | Student (Priya Verma) |
+| 23EC115 | student123 | Student (Amit Kumar) |
